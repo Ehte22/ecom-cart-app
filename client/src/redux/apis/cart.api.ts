@@ -3,7 +3,7 @@ import { ICart } from "../../models/cart.interface"
 
 export const cartApi = createApi({
     reducerPath: "cartApi",
-    baseQuery: fetchBaseQuery({ baseUrl: `${process.env.BASE_URL}/api/v1/cart`, credentials: "include" }),
+    baseQuery: fetchBaseQuery({ baseUrl: `https://ecom-cart-app-server.vercel.app/api/v1/cart`, credentials: "include" }),
     tagTypes: ["cart"],
     endpoints: (builder) => {
         return {
