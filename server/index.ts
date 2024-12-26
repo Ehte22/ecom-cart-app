@@ -12,7 +12,10 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({
+    origin: "https://e-com-main-app.vercel.app",
+    credentials: true
+}));
 app.use(cookieParser())
 
 app.use("/api/v1/cart", protectedRoute, CART_ROUTER);
