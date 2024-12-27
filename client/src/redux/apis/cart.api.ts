@@ -3,8 +3,18 @@ import { ICart } from "../../models/cart.interface"
 
 export const cartApi = createApi({
     reducerPath: "cartApi",
-    // baseQuery: fetchBaseQuery({ baseUrl: `${process.env.BASE_URL}/api/v1/cart`, credentials: "include" }),
-    baseQuery: fetchBaseQuery({ baseUrl: `https://ecom-cart-app-server.vercel.app/api/v1/cart`, credentials: "include" }),
+    baseQuery: fetchBaseQuery({
+        // baseUrl: `${process.env.BASE_URL}/api/v1/cart`, credentials: "include", prepareHeaders(headers, { getState }) {
+        baseUrl: `https://ecom-cart-app-server.vercel.app/api/v1/cart`, credentials: "include", prepareHeaders(headers, { getState }) {
+            const state = getState() as any
+            const token = state.auth.user?.token
+            if (token) {
+                headers.set("Authorization", `Bearer ${token}`);
+            }
+
+            return headers;
+        },
+    }),
     tagTypes: ["cart"],
     endpoints: (builder) => {
         return {

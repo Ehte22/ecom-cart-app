@@ -178,11 +178,11 @@ const Cart = () => {
                                     </div>
                                     <div className="flex justify-between text-lg">
                                         <span className="text-gray-600">Tax</span>
-                                        <span>${tax}</span> {/* Show tax */}
+                                        <span>${tax.toFixed(2)}</span> {/* Show tax */}
                                     </div>
                                     <div className="flex justify-between text-lg font-bold">
                                         <span>Total</span>
-                                        <span>${totalAmount}</span>
+                                        <span>${totalAmount.toFixed(2)}</span>
                                     </div>
                                 </div>
                                 <button
