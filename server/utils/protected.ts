@@ -17,7 +17,7 @@ export const protectedRoute = asyncHandler(async (req: Request, res: Response, n
         return res.status(404).json({ message: "JWT key not found" })
     }
 
-    jwt.verify(req.cookies.user, JWT_KEY, (err: VerifyErrors | null, decoded: any) => {
+    jwt.verify(req.headers.authorization, JWT_KEY, (err: VerifyErrors | null, decoded: any) => {
         if (err) {
             if (err.name === 'TokenExpiredError') {
                 return res.status(401).json({ message: "Token expired" });
