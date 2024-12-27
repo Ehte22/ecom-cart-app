@@ -12,12 +12,17 @@ export const protectedRoute = asyncHandler(async (req: Request, res: Response, n
         return res.status(404).json({ message: "No token found" })
     }
 
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) {
+        return res.status(401).json({ message: "No token provided in the authorization header" });
+    }
+
     const JWT_KEY = process.env.JWT_KEY
     if (!JWT_KEY) {
         return res.status(404).json({ message: "JWT key not found" })
     }
 
-    jwt.verify(req.headers.authorization, JWT_KEY, (err: VerifyErrors | null, decoded: any) => {
+    jwt.verify(token, JWT_KEY, (err: VerifyErrors | null, decoded: any) => {
         if (err) {
             if (err.name === 'TokenExpiredError') {
                 return res.status(401).json({ message: "Token expired" });
